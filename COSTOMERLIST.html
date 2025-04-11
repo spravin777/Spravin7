@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List - Foodie</title>
+    <link rel="stylesheet" href="COSTOMERLIST.css">
+</head>
+<body>
+    <header>
+        <h1>Foodie</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="menu.html">MENU</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="booktable.html">BOOK TABLE</a></li>
+               
+            </ul>
+        </nav>
+        <button class="order-btn">Order Online</button>
+    </header>
+
+    <main>
+        <h2>Customer List</h2>
+        <button id="exportCSV">Export to CSV</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody id="customerTable">
+                <!-- Customers will be added here by JavaScript -->
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        // List of 100 realistic Indian customers with masked phone numbers
+        const customers = [
+            { id: 1, name: "Rajesh Gupta", email: "rajesh.gupta@gmail.com", phone: "98765XXXX", address: "Sector 15, Chandigarh" },
+            { id: 2, name: "Anjali Mehra", email: "anjali.mehra@yahoo.com", phone: "99887XXXX", address: "MG Road, Indore" },
+            { id: 3, name: "Karan Patel", email: "karan.patel@rediffmail.com", phone: "97654XXXX", address: "Satellite, Ahmedabad" },
+            { id: 4, name: "Sonia Arora", email: "sonia.arora@outlook.com", phone: "96543XXXX", address: "Rajouri Garden, Delhi" },
+            { id: 5, name: "Vivek Jain", email: "vivek.jain@gmail.com", phone: "98564XXXX", address: "Palasia, Indore" },
+            { id: 6, name: "Radhika Menon", email: "radhika.menon@hotmail.com", phone: "99336XXXX", address: "Marine Drive, Kochi" },
+            { id: 7, name: "Harish Kumar", email: "harish.kumar@rediffmail.com", phone: "98213XXXX", address: "Sector 17, Chandigarh" },
+            { id: 8, name: "Pallavi Desai", email: "pallavi.desai@gmail.com", phone: "97865XXXX", address: "Jayanagar, Bangalore" },
+            { id: 9, name: "Nitin Malhotra", email: "nitin.malhotra@yahoo.com", phone: "98654XXXX", address: "Hazratganj, Lucknow" },
+            { id: 10, name: "Shweta Kapoor", email: "shweta.kapoor@gmail.com", phone: "98123XXXX", address: "DLF Phase 1, Gurgaon" },
+            { id: 11, name: "Aakash Roy", email: "aakash.roy@hotmail.com", phone: "97234XXXX", address: "Salt Lake, Kolkata" },
+            { id: 12, name: "Tanya Bansal", email: "tanya.bansal@outlook.com", phone: "96785XXXX", address: "Sector 50, Noida" },
+            { id: 13, name: "Ravi Shankar", email: "ravi.shankar@gmail.com", phone: "95432XXXX", address: "Anna Nagar, Chennai" },
+            { id: 14, name: "Preeti Kaur", email: "preeti.kaur@rediffmail.com", phone: "99881XXXX", address: "Phase 3B2, Mohali" },
+            { id: 15, name: "Imran Sheikh", email: "imran.sheikh@hotmail.com", phone: "98761XXXX", address: "Charminar, Hyderabad" },
+            { id: 16, name: "Divya Nair", email: "divya.nair@gmail.com", phone: "96452XXXX", address: "Vyttila, Kochi" },
+            { id: 17, name: "Sanjay Verma", email: "sanjay.verma@yahoo.com", phone: "98654XXXX", address: "Sector 21, Panchkula" },
+            { id: 18, name: "Megha Chatterjee", email: "megha.chatterjee@outlook.com", phone: "99451XXXX", address: "New Alipore, Kolkata" },
+            { id: 19, name: "Arvind Mishra", email: "arvind.mishra@gmail.com", phone: "98456XXXX", address: "Koregaon Park, Pune" },
+            { id: 20, name: "Nisha Yadav", email: "nisha.yadav@rediffmail.com", phone: "97543XXXX", address: "Sector 18, Noida" },
+            { id: 21, name: "Amit Sharma", email: "amit.sharma@gmail.com", phone: "98745XXXX", address: "Civil Lines, Jaipur" },
+            { id: 22, name: "Priya Singh", email: "priya.singh@yahoo.com", phone: "97654XXXX", address: "Banjara Hills, Hyderabad" },
+            { id: 23, name: "Rohan Das", email: "rohan.das@outlook.com", phone: "96543XXXX", address: "Park Street, Kolkata" },
+            { id: 24, name: "Sneha Kulkarni", email: "sneha.kulkarni@gmail.com", phone: "99321XXXX", address: "Shivaji Nagar, Pune" },
+            { id: 25, name: "Manoj Tiwari", email: "manoj.tiwari@hotmail.com", phone: "98213XXXX", address: "Connaught Place, Delhi" },
+            { id: 26, name: "Kavita Joshi", email: "kavita.joshi@rediffmail.com", phone: "97865XXXX", address: "Lalbagh, Lucknow" },
+            { id: 27, name: "Arjun Reddy", email: "arjun.reddy@gmail.com", phone: "98654XXXX", address: "Madhapur, Hyderabad" },
+            { id: 28, name: "Neha Verma", email: "neha.verma@yahoo.com", phone: "98123XXXX", address: "Sector 62, Noida" },
+            { id: 29, name: "Vikas Khanna", email: "vikas.khanna@gmail.com", phone: "97234XXXX", address: "DLF Phase 3, Gurgaon" },
+            { id: 30, name: "Pooja Rao", email: "pooja.rao@outlook.com", phone: "96785XXXX", address: "Indiranagar, Bangalore" },
+            { id: 31, name: "Anil Sharma", email: "anil.sharma@gmail.com", phone: "98765XXXX", address: "MG Road, Bengaluru" },
+            { id: 32, name: "Pooja Verma", email: "pooja.verma@gmail.com", phone: "87654XXXX", address: "Indira Nagar, Lucknow" },
+            { id: 33, name: "Arjun Mehta", email: "arjun.mehta@gmail.com", phone: "76543XXXX", address: "Shivaji Nagar, Pune" },
+            { id: 34, name: "Simran Kaur", email: "simran.kaur@gmail.com", phone: "65432XXXX", address: "Connaught Place, Delhi" },
+            { id: 35, name: "Ravi Singh", email: "ravi.singh@gmail.com", phone: "54321XXXX", address: "Park Street, Kolkata" },
+            { id: 36, name: "Neha Kapoor", email: "neha.kapoor@gmail.com", phone: "43210XXXX", address: "Banjara Hills, Hyderabad" },
+            { id: 37, name: "Vikram Yadav", email: "vikram.yadav@gmail.com", phone: "32109XXXX", address: "Andheri West, Mumbai" },
+            { id: 38, name: "Priya Malhotra", email: "priya.malhotra@gmail.com", phone: "21098XXXX", address: "Anna Nagar, Chennai" },
+            { id: 39, name: "Amit Jain", email: "amit.jain@gmail.com", phone: "10987XXXX", address: "Sector 18, Noida" },
+            { id: 40, name: "Swati Deshmukh", email: "swati.deshmukh@gmail.com", phone: "01987XXXX", address: "Jayanagar, Bengaluru" },
+            { id: 41, name: "Manoj Joshi", email: "manoj.joshi@gmail.com", phone: "19876XXXX", address: "Civil Lines, Jaipur" },
+            { id: 42, name: "Ishita Rao", email: "ishita.rao@gmail.com", phone: "28765XXXX", address: "Salt Lake City, Kolkata" },
+            { id: 43, name: "Nikhil Gupta", email: "nikhil.gupta@gmail.com", phone: "37654XXXX", address: "Gachibowli, Hyderabad" },
+            { id: 44, name: "Kavita Iyer", email: "kavita.iyer@gmail.com", phone: "46543XXXX", address: "Boring Road, Patna" },
+            { id: 45, name: "Sanjay Thakur", email: "sanjay.thakur@gmail.com", phone: "55432XXXX", address: "Rajendra Nagar, Indore" },
+            { id: 46, name: "Ritika Sharma", email: "ritika.sharma@gmail.com", phone: "64321XXXX", address: "Model Town, Ludhiana" },
+            { id: 47, name: "Rohan Aggarwal", email: "rohan.aggarwal@gmail.com", phone: "73210XXXX", address: "Sector 22, Chandigarh" },
+            { id: 48, name: "Ananya Pillai", email: "ananya.pillai@gmail.com", phone: "82109XXXX", address: "Vile Parle, Mumbai" },
+            { id: 49, name: "Karan Vyas", email: "karan.vyas@gmail.com", phone: "91098XXXX", address: "Ramanathapuram, Coimbatore" },
+            { id: 50, name: "Shruti Patil", email: "shruti.patil@gmail.com", phone: "01976XXXX", address: "Sinhagad Road, Pune" },
+            { id: 51, name: "Aakash Reddy", email: "aakash.reddy@gmail.com", phone: "19865XXXX", address: "Whitefield, Bengaluru" },
+            { id: 52, name: "Megha Chauhan", email: "megha.chauhan@gmail.com", phone: "28754XXXX", address: "Sector 7, Faridabad" },
+            { id: 53, name: "Siddharth Batra", email: "siddharth.batra@gmail.com", phone: "37643XXXX", address: "Hazratganj, Lucknow" },
+            { id: 54, name: "Tanya Ghosh", email: "tanya.ghosh@gmail.com", phone: "46532XXXX", address: "South City, Kolkata" },
+            { id: 55, name: "Aditya Narang", email: "aditya.narang@gmail.com", phone: "55421XXXX", address: "DLF Phase 3, Gurgaon" },
+            { id: 56, name: "Rhea Kulkarni", email: "rhea.kulkarni@gmail.com", phone: "64310XXXX", address: "Karve Nagar, Pune" },
+            { id: 57, name: "Varun Nair", email: "varun.nair@gmail.com", phone: "73209XXXX", address: "MG Road, Kochi" },
+            { id: 58, name: "Divya Kapoor", email: "divya.kapoor@gmail.com", phone: "82109XXXX", address: "Malviya Nagar, Delhi" },
+            { id: 59, name: "Yash Mittal", email: "yash.mittal@gmail.com", phone: "91098XXXX", address: "Sector 34, Chandigarh" },
+            { id: 60, name: "Piyush Saxena", email: "piyush.saxena@gmail.com", phone: "01965XXXX", address: "Rajkot Road, Surat" }
+
+            // Add up to 100 customers in the same format...
+        ];
+
+        // Append customers to the table
+        const tableBody = document.getElementById("customerTable");
+        customers.forEach(customer => {
+            const row = `<tr>
+                <td>${customer.id}</td>
+                <td>${customer.name}</td>
+                <td>${customer.email}</td>
+                <td>${customer.phone}</td>
+                <td>${customer.address}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+
+        // Export to CSV function
+        document.getElementById("exportCSV").addEventListener("click", function () {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "ID,Name,Email,Phone,Address\n"; 
+            customers.forEach(c => {
+                csvContent += `${c.id},${c.name},${c.email},${c.phone},${c.address}\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "customer_list.csv");
+            document.body.appendChild(link);
+            link.click();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: white;
+    text-align: center;
+}
+
+header {
+    background: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Cursive', sans-serif;
+    color: white;
+    padding: 10px;
+    border: 2px solid yellow;
+    border-radius: 10px;
+    display: inline-block;
+    background: rgba(255, 255, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+nav ul li a.active {
+    color: yellow;
+    background: rgba(255, 255, 0, 0.2);
+}
+
+.order-btn {
+    background-color: yellow;
+    padding: 10px 15px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(255, 255, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 255, 0, 0.7);
+}
+
+h2 {
+    margin-top: 30px;
+    padding: 10px;
+    border: 2px solid yellow;
+    display: inline-block;
+    border-radius: 10px;
+    background: rgba(255, 255, 0, 0.1);
+}
+
+button {
+    background: yellow;
+    color: black;
+    padding: 10px;
+    border: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border-radius: 5px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+table {
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+    background: white;
+    color: black;
+    box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    transform: perspective(1000px) rotateX(5deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+table:hover {
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+th, td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: yellow;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 3px 10px rgba(255, 255, 0, 0.5);
+}
+
+td {
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+td:hover {
+    background: rgba(255, 255, 0, 0.2);
+}
+
+
+@media only screen and (max-width: 768px) {
+    body, html {
+        padding: 10px !important;
+        margin: 0 !important;
+    }
+
+    .container, .content, .wrapper, .section {
+        padding: 10px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+        padding: 5px !important;
+        margin: 5px 0 !important;
+    }
+
+    nav, header, footer {
+        padding: 10px !important;
+        text-align: center !important;
+    }
+
+    .button, button, input, select, textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  body, html {
+    padding: 10px !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+  }
+  .container, .content, .wrapper, .box {
+    padding: 10px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.2em !important;
+  }
+}
